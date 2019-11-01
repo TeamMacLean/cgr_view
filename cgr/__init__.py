@@ -29,6 +29,8 @@ def get_kmer_list(jellyfish):
     proc = subprocess.Popen(cmd, stdout = subprocess.PIPE )
     for line in proc.stdout:
         yield line.decode("utf-8").rstrip().split(" ")
+    proc.wait()
+    proc.stdout.close()
 
 def get_grid_size(k):
     return(int(math.sqrt(4**k)))
@@ -91,13 +93,12 @@ def join_cgr(a,b):
 def show_image(cgr_matrix, cmap = "Greys", log = True):
     """displays a cgr matrix in the viewer - is likely scaled by the image generator. works only on 1channel cgr"""
     if log:
-        cgr_matrix = log_matrix(cgr)
+        cgr_matrix = log_matrix(cgr_matrix)
     if not is_numpy_array(cgr_matrix):
         cgr_matrix = cgr_matrix.toarray()
     plt.imshow(cgr_matrix, interpolation='nearest', cmap = cmap)
     plt.show()
-#    if len(cgr_matrix.shape == 2):
-#        cgr_matrix = cgr_matrix[..., newaxis]
+
         
 def pad_two_channel_to_three(cgr2chan):
     ''' takes a two channel cgr and pads a third channel containing zero values'''
@@ -108,37 +109,11 @@ def save_as_csv(cgr_matrix, file = "cgr_matrix.csv", delimiter = ",", fmt='%.3f'
     """writes 1 channel cgr matrix to file"""
     numpy.savetxt(file, cgr_matrix.toarray(), delimiter = delimiter, fmt = fmt)
     
-## Purpose - librawry of functions for creating CGR matrices.
-
-## also has some functions for making images of CGRS.
-
-## Workflow:
-# make kmer count db in jellyfish from fasta -> generate cgr from db -> save cgr.
-# also merge two cgrs into single array
-
-## USage:
-
-#Make kmer count db
-#   run_jellyfish("test_data/NC_012920.fasta", 11, "11mer.jf")
-#   run_jellyfish("test_data/NC_012920.fasta", 10, "10_mer.jf")
 
 
-#Load CGRs from kmer count db
-#   cgr1 = cgr_matrix("/Users/macleand/Desktop/effectors_vs_rgenes/lib/athal-5-mers.jf")
-#   cgr2 = cgr_matrix("test_data/five_mer.jf")
-#   
-
-# preview a single one channel cgr
-#   show_image(cgr1)
-
-# save a single cgr into a text file
-#   save_as_csv(cgr1, file = "out.csv")
-
-# Join two cgrs into one
-#   merged_cgr = join_cgr(cgr1, cgr2)
-
-# write merged cgr to image file (not single channel cgr), by creating a three channel array to convert
-#
-# padded = pad_two_channel_to_three(merged_cgr)
-# img = Image.fromarray(padded, 'RGB')
-# img.save('out.png')
+# TODO
+# Improve rendering. Scale array to 0..1. Use HSV, H for single array (others are constant and definable. S = 0.5 default, V = 0.5 default)
+# For two array use H and S or H and V, set other as above
+# Allow output scaling
+# save functions in cgr.view. Merging made internal
+# docs
