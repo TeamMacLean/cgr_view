@@ -21,6 +21,7 @@ setup(
         "matplotlib >= 3.1.0",
         "scipy >= 1.3.1",
         "pillow >= 6.2.1",
-        "skimage >= 0.15.0"
+        "skimage >= 0.15.0",
+        "biopython >= 1.7"
     ]
 )
