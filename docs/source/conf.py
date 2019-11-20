@@ -55,3 +55,5 @@ html_static_path = ['_static']
 
 
 pygments_style = 'sphinx'
+
+master_doc = 'index'
