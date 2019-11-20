@@ -5,3 +5,8 @@
 __pycache__/test_cgr.cpython-37.pyc
 cgr/__pycache__/
 docs/.DS_Store
+.eggs/
+build/
+dist/
+push_to_pypi.sh
+cgr_view.egg-info

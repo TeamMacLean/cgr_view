@@ -1,15 +1,14 @@
-from setuptools import setup
+import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 
-setup(
+setuptools.setup(
     name='cgr_view',
     version='0.0.1dev1',
-    packages=['cgr'],
-    url='github.com/TeamMacLean/cgr_view',
-    packages=find.packages(),
+    url='https://github.com/TeamMacLean/cgr_view',
+    packages=setuptools.find_packages(),
     long_description_content_type="text/markdown",
     license='LICENSE.txt',
     author='Dan MacLean',
@@ -21,7 +20,7 @@ setup(
         "matplotlib >= 3.1.0",
         "scipy >= 1.3.1",
         "pillow >= 6.2.1",
-        "skimage >= 0.15.0",
+        "scikit-image >= 0.15.0",
         "biopython >= 1.7"
     ]
 )
