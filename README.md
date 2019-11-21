@@ -2,6 +2,11 @@
 
 Draw CGRs of DNA
 
+
+[![Documentation Status](https://readthedocs.org/projects/cgr-view/badge/?version=latest)](https://cgr-view.readthedocs.io/en/latest/?badge=latest)
+
+Read the Docs at: [https://cgr-view.readthedocs.io/](https://cgr-view.readthedocs.io/)  
+
 ## Requirements
 
     * jellyfish on the path

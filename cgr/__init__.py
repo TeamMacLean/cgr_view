@@ -249,6 +249,21 @@ def get_k(jellyfish: str) -> int:
     return int(r.group(1))
 
 
+def get_max_count(jellyfish) -> int:
+    """
+    estimates the count of the most represented kmer in the jellyfish file by using the last bucket of the
+    :param jellyfish:
+    :return: int estimated count of the most represented kmer
+    """
+    cmd = ["jellyfish", "histo", jellyfish ]
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    counts = []
+    for line in proc.stdout:
+        counts.append( line.decode("utf-8").rstrip().split(" ") )
+    proc.wait()
+    proc.stdout.close()
+    return int(counts[-1][0])
+
 def cgr_matrix(jellyfish: str) -> scipy.sparse.dok_matrix:
     """
     Main function, creates the cgr matrix, a sparse matrix of type scipy.sparse.dok_matrix
@@ -261,8 +276,12 @@ def cgr_matrix(jellyfish: str) -> scipy.sparse.dok_matrix:
     """
 
     k = get_k(jellyfish)
+    max_c = get_max_count(jellyfish)
+    dtype_to_use = numpy.uint8
+    if max_c > 255:
+        dtype_to_use = numpy.uint16
     grid_size = get_grid_size(k)
-    cgr_mat = scipy.sparse.dok_matrix((grid_size, grid_size), dtype=numpy.int32)
+    cgr_mat = scipy.sparse.dok_matrix((grid_size, grid_size), dtype=dtype_to_use)
     for kmer, count in get_kmer_list(jellyfish):
         x, y = get_coord(kmer)
         cgr_mat[x, y] = count
@@ -594,3 +613,5 @@ def from_fasta(fasta_file: str, outfile: str = "my_cgrs", as_single: bool=False,
         cgr1 = stack_cgrs(cgr_t)
         save_cgr(cgr1, outfile = outfile )
 
+# TODO
+# test new dtype switching cgr matrix function - try using from_fasta

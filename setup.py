@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='cgr_view',
-    version='0.0.1dev1',
+    version='0.0.1dev2',
     url='https://github.com/TeamMacLean/cgr_view',
     packages=setuptools.find_packages(),
     long_description_content_type="text/markdown",
