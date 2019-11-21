@@ -2,12 +2,13 @@ language: python
 python:
   - "3.7"
 before_install:
-  - wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && chmod 577 Miniconda3-latest-Linux-x86_64.sh
-  - ./Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda3
+  - wget https://github.com/gmarcais/Jellyfish/releases/download/v2.3.0/jellyfish-2.3.0.tar.gz && tar -zxvf jellyfish-2.3.0.tar.gz && cd jellyfish-2.3.0
+  - ./configure --prefix=$HOME
+  - make -j 4
+  - make install
 # command to install dependencies
 install:
   - pip install -r requirements.txt
-  - conda install -c bioconda jellyfish
 # command to run tests
 script:
   - pytest
