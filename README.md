@@ -1,9 +1,11 @@
 # cgr_view
 
-Draw CGRs of DNA
 
-
+![Build Status](https://travis-ci.com/TeamMacLean/cgr_view.svg?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/cgr-view/badge/?version=latest)](https://cgr-view.readthedocs.io/en/latest/?badge=latest)
+[![Coverage Status](https://coveralls.io/repos/github/TeamMacLean/cgr_view/badge.svg?branch=master)](https://coveralls.io/github/TeamMacLean/cgr_view?branch=master)
+
+Draw CGRs of DNA
 
 Read the Docs at: [https://cgr-view.readthedocs.io/](https://cgr-view.readthedocs.io/)  
 
