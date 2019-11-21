@@ -5,7 +5,7 @@ python:
 install:
   - pip install -r requirements.txt
   - wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && chmod 577 Miniconda3-latest-Linux-x86_64.sh
-  - ./Miniconda3-latest-Linux-x86_64.sh
+  - ./Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
   - conda install -c bioconda jellyfish
 # command to run tests
 script:
